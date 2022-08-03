@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+  
+<head>
+<meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>jamLog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="l-container l-spacing-top l-color-dark">
+<a href="/"><img class="l-spacing-top" width="85px" src="https://gamma-410.github.io/logo.svg"></a>   
+<p class="l-spacing-top l-fontWeight-bold l-spacing-bottom" style="font-size:2rem;">jamLog.</p>
+<p class="l-color-grey l-fontWeight-regular">minimum blog</p> 
+<hr class="l-spacing-top l-spacing-bottom">
+<p style="font-size:25px;padding-bottom:20px;">Article</p>
+<div class="flex-container1">
+<div class="item1">
+<h1>Go言語でDDSKに参加した話</h1>
+<p>今宵のお天気はどうでしょう。こんばんは✨ @gamma410です。<br />
+最近はGoを毎日書くことにハマっています...  </p>
+<h2>本題</h2>
+<p>さて、今回。<a href="https://twitter.com/comamoca_">@Comamoca</a> さんのGitHubリポジトリ<a href="https://github.com/comamoca/Awesome-DDSK">「Awesome-DDSK」</a>にPRして参加してきました...<br />
+私は血迷っていたのか、ノリで「GoでDDSKするか()」という呟きをしてしまい、無知で知識皆無なのにも関わらずコードを書いていくことになりました。<br />
+無事にPRできた時マジでホッとしました。  </p>
+<h2>難しかったこと・ハマったこと</h2>
+<p>Go初心者の私がハマったところを紹介します。<br />
+- ddsk[2] string = [2]string {"ドド", "スコ"}<br />
+まず、ここでハマりました。<br />
+ここでの学びは、<strong>配列はconstできない</strong>と言うことです。Goの配列・スライスは特徴的ですよね。そのため、<br />
+<code>array := [int]&lt;型&gt; {&lt;要素&gt;, &lt;要素&gt;, &lt;要素&gt;, ...}</code><br />
+こんな感じです。<code>int</code>とあります。配列内の個数は固定です。なので、私のような初学者は「これってconstできるんじゃね？」ってなるんです。しかし、<code>array</code> 自体は可変するものなのです。マジでハマりました。stackoverflowは神です、おすすめ。(海外の方の情報がめっちゃ使えるよ)  </p>
+<ul>
+<li>len()<br />
+これもマジでハマりました。<br />
+なんなんですか、マジで。<br />
+いつもPythonと仲良くしている私。Pythonくんの len() は文字数、長さを返してくれます。<br />
+しかーし、Goくんの len() は byte長 で返してきます。<br />
+つまり、アルファベット・数字なら良いんです。1byteなので。しかし、我々の使用している日本語、ジャパニーーーーズは、3byteなんです。(1文字)。<br />
+いやーなんなんですかね。 よくわからなくて、無限ドドスコに陥っていましたよ、まったくぅ、もうっ！！()<br />
+3byte 必要ということを todo というコマンドを書いた時(まだ未完成)に学んだので役に立ちました。<br />
+勘でゴニョゴニョしてたらできたので、ここはもう少し調べて理解していきたいです。<br />
+解決法として思いついたのは、"ドドスコスコスコドドスコスコスコドドスコスコスコ"は1文字3byteなので、  </li>
+</ul>
+<p><code>if len(text) &gt;= 3*24 {}</code> という形にしてやりました。意味としては、24文字 × 一文字分の3byte って感じです。<br />
+- text[a:b]<br />
+これはズバリ、知識不足の問題っ🌟<br />
+スライスですね。これも todo コマンドの時に学びました、が、忘れてました。（というか、詳しく知りませんでした。）<br />
+これは、前から、後ろのここまでを持ってくるよー、みたいな感じです。(まだ、全部理解してませんが、そんなイメージです。)<br />
+これ、実はPythonにもありました。というか、今回Python版で書いている方のコードをめちゃくちゃ参考にしました（）<br />
+参考にしてて思ったことが、GoってめちゃくちゃPythonみたいに書けるなってことです、いや、PythonがGoみたいに書けるのかもしれません...<br />
+新しい文法を学ぶ良い機会でした。  </p>
+<h2>最後に。</h2>
+<p>とても良い機会でした、、、適当な呟きによってとてもお勉強できました...()<br />
+@comamoca さん、本当にありがとうございました。そして、このDDSK問題を出題してくださった<a href="https://twitter.com/Sheeeeepla">@Sheeeeepla</a>さん、本当にありがとうございました。<br />
+お勉強できたぁ()<br />
+todo コマンドも、もうそろそろ完成するのでお楽しみに。<br />
+おわり。</p>
+</div>
+</div>
+<hr class="l-spacing-top l-spacing-bottom">
+
+<p class="l-spacing-bottom" style="text-align:center;font-size:12px;">Copyright © 2022 gamma410 All rights reserved. </p>
+
+</body>
+  
+<html>
